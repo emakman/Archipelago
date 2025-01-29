@@ -5,7 +5,7 @@
 - Yoku's Island Adventure, from:
     - [GOG.com](https://www.gog.com/en/game/yokus_island_express), or
     - [Steam](https://store.steampowered.com/app/334940/Yokus_Island_Express/)
-- The [Yoku's Island Express randomizer](https://git.makuluni.com/emakman/YokusIslandAdventure_randomizer/)
+- The [Yoku's Island Express randomizer](https://git.makuluni.com/archipelago/YokusIslandAdventure_randomizer/)
 
 ## Optional Software
  
