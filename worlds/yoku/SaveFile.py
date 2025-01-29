@@ -1,23 +1,22 @@
 from .Locations import location_table
 from .Items import YokuItem,ItemName,item_table
-from BaseClasses import Item
+from BaseClasses import Item, MultiWorld
 from copy import deepcopy
 import json
 import zipfile
-import os
 
 class SaveItem:
     id: int
     item: str
     revealed: bool | None = None
     tracker: str | None = None
-    def __init__(self, loc: str, item: Item): 
+    def __init__(self, loc: str, item: Item, worlds: MultiWorld): 
         loc_data = location_table[loc]
         self.id = loc_data["save_id"]
         if isinstance(item, YokuItem):
             self.item = item_table[ItemName(item.name)].yoku_ids[0]
         else:
-            self.item = f"amwr/{item.name}\u001e{item.player}"
+            self.item = f"amwr/{item.name}\u001e{worlds.player_name[item.player]}\u001e{worlds.worlds[item.player].game}"
         if "tracker_string" in loc_data:
             self.tracker = loc_data["tracker_string"]
         if "revealed" in loc_data:

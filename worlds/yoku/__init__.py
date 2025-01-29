@@ -141,51 +141,8 @@ class YokuWorld(World):
             for loc in r.locations:
                 if isinstance(loc, YokuLocation) and loc.name in location_table:
                     assert(loc.item)
-                    items+=[SaveItem(loc.name,loc.item)]
+                    items+=[SaveItem(loc.name,loc.item, self.multiworld)]
 
         file_base = self.multiworld.get_out_file_name_base(self.player)
         files = SaveFiles(os.path.join(output_directory,file_base),items)
         files.save()
-                    # If we're a links awakening item, just use the item
-        #             if isinstance(loc.item, LinksAwakeningItem):
-        #                 loc.ladxr_item.item = loc.item.item_data.ladxr_id
-        #
-        #             # If the item name contains "sword", use a sword icon, etc
-        #             # Otherwise, use a cute letter as the icon
-        #             else:
-        #                 loc.ladxr_item.item = self.guess_icon_for_other_world(loc.item.name)
-        #                 loc.ladxr_item.custom_item_name = loc.item.name
-        #
-        #             if loc.item:
-        #                 loc.ladxr_item.item_owner = loc.item.player
-        #             else:
-        #                 loc.ladxr_item.item_owner = self.player
-        #
-        #             # Kind of kludge, make it possible for the location to differentiate between local and remote items
-        #             loc.ladxr_item.location_owner = self.player
-        #
-        # rom_name = Rom.get_base_rom_path()
-        # out_name = f"AP-{self.multiworld.seed_name}-P{self.player}-{self.player_name}.gbc"
-        # out_path = os.path.join(output_directory, f"{self.multiworld.get_out_file_name_base(self.player)}.gbc")
-        #
-        # parser = get_parser()
-        # args = parser.parse_args([rom_name, "-o", out_name, "--dump"])
-        #
-        # rom = generator.generateRom(args, self)
-        #
-        # with open(out_path, "wb") as handle:
-        #     rom.save(handle, name="LADXR")
-        #
-        # # Write title screen after everything else is done - full gfxmods may stomp over the egg tiles
-        # if self.options.ap_title_screen:
-        #     with tempfile.NamedTemporaryFile(delete=False) as title_patch:
-        #         title_patch.write(pkgutil.get_data(__name__, "LADXR/patches/title_screen.bdiff4"))
-        #
-        #     bsdiff4.file_patch_inplace(out_path, title_patch.name)
-        #     os.unlink(title_patch.name)
-        #
-        # patch = LADXDeltaPatch(os.path.splitext(out_path)[0]+LADXDeltaPatch.patch_file_ending, player=self.player,
-        #                        player_name=self.player_name, patched_path=out_path)
-        # patch.write()
-        # if not DEVELOPER_MODE:
-        #     os.unlink(out_path)
