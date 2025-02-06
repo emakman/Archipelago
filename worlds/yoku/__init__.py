@@ -13,7 +13,7 @@ from .Items import item_table, YokuItem, ItemType, ItemGroup, ItemName
 from .Locations import location_table,YokuLocation
 from .Options import YokuOptions
 from .Regions import YokuRegions
-from .SaveFile import SaveFiles, SaveItem
+from .SaveFile import SaveFile, SaveItem
 
 class YokusWeb(WebWorld):
     """
@@ -141,8 +141,8 @@ class YokuWorld(World):
             for loc in r.locations:
                 if isinstance(loc, YokuLocation) and loc.name in location_table:
                     assert(loc.item)
-                    items+=[SaveItem(loc.name,loc.item, self.multiworld)]
+                    items+=[SaveItem(loc.name, loc.item, self.multiworld)]
 
         file_base = self.multiworld.get_out_file_name_base(self.player)
-        files = SaveFiles(os.path.join(output_directory,file_base),items)
+        files = SaveFile(file_base,self.player_name,os.path.join(output_directory,file_base),items)
         files.save()
