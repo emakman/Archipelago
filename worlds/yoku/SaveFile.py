@@ -9,10 +9,10 @@ class SaveItem:
     item: str
     revealed: bool | None = None
     tracker: str | None = None
-    def __init__(self, loc: str, item: Item, worlds: MultiWorld): 
+    def __init__(self, loc: str, item: Item, worlds: MultiWorld, local: bool): 
         loc_data = location_table[loc]
         self.id = loc_data["id"]
-        if isinstance(item, YokuItem):
+        if local:
             self.item = item_table[ItemName(item.name)].yoku_ids[0]
         else:
             self.item = f"amwr/{item.name}\u001e{worlds.player_name[item.player]}\u001e{worlds.worlds[item.player].game}"

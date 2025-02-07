@@ -141,7 +141,7 @@ class YokuWorld(World):
             for loc in r.locations:
                 if isinstance(loc, YokuLocation) and loc.name in location_table:
                     assert(loc.item)
-                    items+=[SaveItem(loc.name, loc.item, self.multiworld)]
+                    items+=[SaveItem(loc.name, loc.item, self.multiworld, loc.item.player == self.player)]
 
         file_base = self.multiworld.get_out_file_name_base(self.player)
         files = SaveFile(file_base,self.player_name,os.path.join(output_directory,file_base),items)
