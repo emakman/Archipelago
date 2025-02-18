@@ -40,7 +40,7 @@ Right click the game name in your library and select "Properties…"
 
 Under "LAUNCH OPTIONS" enter:
 ```bash
-yam.exe %command%
+yam.exe /Steam %command%
 ```
 or, on linux:
 ```bash

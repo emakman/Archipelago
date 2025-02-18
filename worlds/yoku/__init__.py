@@ -13,7 +13,6 @@ from .Items import item_table, YokuItem, ItemType, ItemGroup, ItemName
 from .Locations import location_table,YokuLocation
 from .Options import YokuOptions
 from .Regions import YokuRegions
-from .SaveFile import SaveFile, SaveItem
 
 class YokusWeb(WebWorld):
     """
@@ -126,23 +125,7 @@ class YokuWorld(World):
             state: state.has("Victory", self.player)
 
     def generate_basic(self) -> None:
-        """
-        Player-specific randomization that does not affect logic.
-        Used to fill then `ingredients_substitution` list
-        """
+        return
 
     def fill_slot_data(self) -> Dict[str, Any]:
         return {}
-
-    def generate_output(self, output_directory: str):
-        # copy items back to locations
-        items: list[SaveItem] = []
-        for r in self.multiworld.get_regions(self.player):
-            for loc in r.locations:
-                if isinstance(loc, YokuLocation) and loc.name in location_table:
-                    assert(loc.item)
-                    items+=[SaveItem(loc.name, loc.item, self.multiworld, loc.item.player == self.player)]
-
-        file_base = self.multiworld.get_out_file_name_base(self.player)
-        files = SaveFile(file_base,self.player_name,os.path.join(output_directory,file_base),items)
-        files.save()
